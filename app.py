@@ -1,4 +1,4 @@
-"""app.py — py-ws 单文件版，详见 README.md。"""
+"""app.py — py-ws 单文件版"""
 import base64
 import json
 import logging
@@ -21,15 +21,15 @@ from pathlib import Path
 # 配置区（可在这里直接填写，优先级高于环境变量；留空则读环境变量，都没有则自动生成/使用默认值）
 # ============================================================================
 CONF_UUID = ""            # VMess/VLESS 统一 ID
-CONF_TROJAN_PASS = ""     # Trojan 独立密码（留空则自动生成并持久化）
-CONF_PORT = ""            # 容器内实际监听端口（部署平台通常会通过 PORT 环境变量注入）
-CONF_NODE_PORT = ""       # 分享链接里使用的对外端口（客户端连接的端口）；留空则自动决定：
+CONF_TROJAN_PASS = ""     # Trojan 独立密码
+CONF_PORT = ""            # 容器内实际监听端口
+CONF_NODE_PORT = ""       # 分享链接里使用的对外端口；留空则自动决定：
                           # 有域名（TLS）时用 443，纯 IP 兜底（明文）时用实际监听端口
 CONF_DOMAIN = ""          # 可选：部署平台分配/绑定的公网域名；留空则自动探测，
-                          # 依次退化为：公网 IP + 明文 ws -> 占位域名（生成的节点连不通，需尽快补设）
+                          # 依次退化为：公网 IP + 明文 ws -> 占位域名
 CONF_FRONT_HOST = ""      # 可选：如果域名前面还套了一层自己的 CDN，这里填 CDN 域名作为连接地址；
                           # 留空则直接用 DOMAIN/自动探测结果作为连接地址
-CONF_NAME = ""            # 节点名称前缀（留空则自动识别 国家-平台/ASN）
+CONF_NAME = ""            # 节点名称前缀
 CONF_SUB = ""             # 订阅路径，默认 sub
 CONF_CLEANUP_AFTER_DEPLOY = True  # 部署成功后自动清理不再需要的临时文件
 # ============================================================================
