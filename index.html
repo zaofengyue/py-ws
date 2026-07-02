@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Letters Across the Ocean — Starry Night Edition</title>
+
+<style>
+:root{
+    --bg1:#040914;
+    --bg2:#071426;
+    --bg3:#0b1f35;
+    --card:rgba(13,24,40,.72);
+    --border:rgba(125,170,220,.15);
+    --text:#e8f1fb;
+    --muted:#9bb2c8;
+    --accent:#9fd0ff;
+    --accent2:#d9ecff;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family: Georgia, serif;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,.8) 1px, transparent 2px),
+        radial-gradient(circle at 70% 25%, rgba(255,255,255,.6) 1px, transparent 2px),
+        radial-gradient(circle at 50% 70%, rgba(255,255,255,.7) 1px, transparent 2px),
+        radial-gradient(circle at 90% 10%, rgba(255,255,255,.9) 1px, transparent 2px),
+        radial-gradient(circle at 30% 80%, rgba(255,255,255,.7) 1px, transparent 2px),
+        linear-gradient(to bottom,var(--bg1),var(--bg2),var(--bg3));
+    background-size:
+        300px 300px,
+        500px 500px,
+        450px 450px,
+        350px 350px,
+        600px 600px,
+        cover;
+    overflow-x:hidden;
+}
+
+/* moon */
+.moon{
+    position:fixed;
+    width:160px;
+    height:160px;
+    border-radius:50%;
+    top:80px;
+    right:8%;
+    background:radial-gradient(circle,#ffffff 0%,#dcecff 45%,#9ecbff 100%);
+    box-shadow:
+        0 0 40px rgba(170,210,255,.8),
+        0 0 120px rgba(170,210,255,.35);
+    z-index:0;
+}
+
+/* stars animation */
+.star{
+    position:fixed;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    animation: twinkle 4s infinite ease-in-out;
+}
+
+@keyframes twinkle{
+    0%,100%{opacity:.2;}
+    50%{opacity:1;}
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px 20px;
+    position:relative;
+    z-index:1;
+}
+
+.hero-content{
+    max-width:900px;
+}
+
+.hero small{
+    letter-spacing:5px;
+    color:var(--accent);
+    text-transform:uppercase;
+}
+
+.hero h1{
+    font-size:clamp(3rem,9vw,6.5rem);
+    font-weight:300;
+    margin:20px 0;
+    letter-spacing:2px;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    color:var(--muted);
+    font-size:1.15rem;
+    line-height:2;
+}
+
+.scroll{
+    margin-top:60px;
+    color:var(--muted);
+    letter-spacing:3px;
+    font-size:.8rem;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:40px 20px 120px;
+    position:relative;
+    z-index:1;
+}
+
+.section-title{
+    text-align:center;
+    margin:100px 0 60px;
+}
+
+.section-title span{
+    color:var(--accent);
+    letter-spacing:4px;
+    text-transform:uppercase;
+    font-size:.8rem;
+}
+
+.section-title h2{
+    margin-top:15px;
+    font-size:3rem;
+    font-weight:300;
+}
+
+.letter{
+    background:var(--card);
+    backdrop-filter:blur(14px);
+    border:1px solid var(--border);
+    border-radius:28px;
+    padding:40px;
+    margin-bottom:35px;
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+    transition:.35s;
+}
+
+.letter:hover{
+    transform:translateY(-6px);
+}
+
+.letter-id{
+    color:var(--accent);
+    text-transform:uppercase;
+    letter-spacing:2px;
+    font-size:.8rem;
+    margin-bottom:18px;
+}
+
+.letter h3{
+    font-size:2rem;
+    font-weight:300;
+    margin-bottom:20px;
+    color:var(--accent2);
+}
+
+.letter p{
+    color:#d7e3f0;
+    margin-bottom:18px;
+    line-height:2;
+}
+
+.signature{
+    margin-top:25px;
+    color:var(--accent);
+    font-style:italic;
+}
+
+.quote{
+    text-align:center;
+    max-width:850px;
+    margin:110px auto;
+    font-size:2rem;
+    line-height:1.8;
+    color:var(--accent2);
+    font-style:italic;
+}
+
+.quote::before{
+    content:"❝";
+    display:block;
+    font-size:4rem;
+    opacity:.4;
+    margin-bottom:20px;
+}
+
+.footer{
+    text-align:center;
+    padding:80px 20px;
+    border-top:1px solid rgba(255,255,255,.08);
+    color:var(--muted);
+}
+
+.footer h3{
+    font-size:2rem;
+    font-weight:300;
+    margin-bottom:10px;
+    color:var(--accent2);
+}
+
+.ocean{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:180px;
+    background:
+        linear-gradient(
+            to top,
+            rgba(8,25,46,.95),
+            rgba(8,25,46,.5),
+            transparent
+        );
+    z-index:0;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:4rem;
+}
+
+.section-title h2{
+    font-size:2.2rem;
+}
+
+.quote{
+    font-size:1.4rem;
+}
+
+.letter{
+    padding:28px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="moon"></div>
+<div class="ocean"></div>
+
+<script>
+for(let i=0;i<80;i++){
+    const s=document.createElement('div');
+    s.className='star';
+    s.style.left=Math.random()*100+'vw';
+    s.style.top=Math.random()*100+'vh';
+    s.style.animationDuration=(2+Math.random()*5)+'s';
+    s.style.opacity=Math.random();
+    document.body.appendChild(s);
+}
+</script>
+
+<section class="hero">
+    <div class="hero-content">
+        <small>Starry Night Edition</small>
+
+        <h1>Letters Across<br>the Ocean</h1>
+
+        <p>
+            Somewhere beneath this same sky, another person is watching the same stars,
+            listening to distant waves, and quietly hoping for peace.
+            These letters drift across the sea with no destination,
+            waiting patiently for the right person to find them.
+        </p>
+
+        <div class="scroll">SCROLL TO OPEN THE BOTTLES</div>
+    </div>
+</section>
+
+<main class="container">
+
+    <div class="section-title">
+        <span>Found Tonight</span>
+        <h2>Messages Washed Ashore</h2>
+    </div>
+
+    <article class="letter">
+        <div class="letter-id">Letter #001 · To Whoever Needs This</div>
+
+        <h3>You Are Allowed to Slow Down</h3>
+
+        <p>
+            The stars above the ocean have existed for millions of years.
+            They are in no hurry.
+        </p>
+
+        <p>
+            The tide arrives exactly when it should.
+            The moon never apologizes for moving slowly across the sky.
+            Perhaps you don't need to rush either.
+        </p>
+
+        <p>
+            Rest is not falling behind.
+            Rest is part of the journey.
+        </p>
+
+        <div class="signature">
+            — Sent from somewhere beyond the horizon
+        </div>
+    </article>
+
+    <article class="letter">
+        <div class="letter-id">Letter #014 · Midnight Waters</div>
+
+        <h3>Loneliness Is Not Always Empty</h3>
+
+        <p>
+            There is a kind of loneliness that hurts,
+            but there is another kind that heals.
+        </p>
+
+        <p>
+            Sitting beside the sea at night,
+            listening only to waves and wind,
+            solitude becomes less like an absence
+            and more like space finally returning to you.
+        </p>
+
+        <div class="signature">
+            — Written under moonlight
+        </div>
+    </article>
+
+    <article class="letter">
+        <div class="letter-id">Letter #027 · Unknown Origin</div>
+
+        <h3>Tomorrow Is Still Being Written</h3>
+
+        <p>
+            The ocean never reveals the entire journey at once.
+            Sailors navigate by the next star,
+            not by seeing the whole destination.
+        </p>
+
+        <p>
+            You do not need all the answers tonight.
+            Sometimes one small step in the dark is enough.
+        </p>
+
+        <div class="signature">
+            — A bottle sealed with hope
+        </div>
+    </article>
+
+    <div class="quote">
+        Not every message needs a destination.<br>
+        Some are written simply to be carried by the sea.
+    </div>
+
+    <article class="letter">
+        <div class="letter-id">Final Letter · Before Sunrise</div>
+
+        <h3>The Same Sky</h3>
+
+        <p>
+            If this night feels heavy, look upward.
+        </p>
+
+        <p>
+            Somewhere far away, another person is standing beneath these same stars.
+            You will never meet them,
+            and yet for a moment you share the same sky,
+            the same moon, and the same quiet ocean.
+        </p>
+
+        <p>
+            Sometimes that is enough to feel a little less alone.
+        </p>
+
+        <div class="signature">
+            — Letters Across the Ocean
+        </div>
+    </article>
+
+</main>
+
+<footer class="footer">
+    <h3>Letters Across the Ocean</h3>
+    <p>
+        A quiet place for drifting thoughts, moonlight, and gentle seas.
+    </p>
+</footer>
+
+</body>
+</html>
