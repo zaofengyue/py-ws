@@ -22,7 +22,7 @@ jobs:
       - name: Package release files (for 文件上传部署)
         run: |
           mkdir -p release
-          cp app.py release/app.py
+          cp app.py index.html release/
           cd release && zip -r ../py-ws.zip .
 
       - name: Login to ghcr.io
@@ -51,6 +51,6 @@ jobs:
             两种部署方式：
 
             1. **Docker**：`docker pull ghcr.io/${{ github.repository_owner }}/py-ws:latest`
-            2. **文件上传**：下载 `py-ws.zip` 解压后，将 `app.py` 上传到目标平台，运行 `python app.py`
+            2. **文件上传**：下载 `py-ws.zip` 解压后，将 `app.py` 和 `index.html` 上传到目标平台，运行 `python app.py`
 
             部署前必须设置环境变量 `DOMAIN` 为平台分配的公网域名，否则节点无法生成有效连接信息。
