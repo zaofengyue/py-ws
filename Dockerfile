@@ -8,6 +8,6 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-COPY app.py ./
+COPY app.py index.html ./
 
 CMD ["python", "app.py"]
